@@ -2,10 +2,9 @@
 title: API Reference
 
 language_tabs:
-  - shell
-  - ruby
-  - python
-  - javascript
+  - PHP
+  - Android
+  - Objective-C
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -19,41 +18,9 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Welcome to the SocialPilot API!
 
 # Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
 
 Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
 
@@ -65,146 +32,2628 @@ Kittn expects for the API key to be included in all API requests to the server i
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
+# Authenticate User
+
+## Register
+
+This api is used for user registration.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/mobapi/register`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+email | Yes | It should be user's email address.
+password | Yes | It should be user's password.
+retype | No | Parameter value is not needed.
+full_name | Yes | Parameter value is not needed.
+email_verified | No | Static N is passed.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"msg": "You have successfully registered. Please check your email for activation",
+	"url": "https://panel.socialpilot.co/companyUser/resend?mail=p1N0zL01961d210ozU81Y21001Gszv41q81Y2zT81w8zO917+",
+	"info": {
+		"access_token": "Lzv7wxwijMc4T7TIcMDuRb5kEg19bKVbTSckL0KmwKiUZwbXqiBDL1eokbYRoRKXHAmKDiTWzGKqztTV",
+		"token_type": "Bearer",
+		"expires": 1491299941,
+		"expires_in": 5184000
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 200
+ 
+ ```json
+ {
+	"error": 1,
+	"msg": "<div><ul><li>User is already exist with this email address</li></ul></div>"
+}
+```
+
+## Register with other social media
+
+This api is used for user registration.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/mobapi/registerbysm`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+email | No | Twitter registration do not require email, while linkedin and fb registration requires email.
+full_name | No | Full name fetched from third party.
+email_verified | No | Static Y or N is passed.
+from | Yes | Name of social media you are using.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"msg": {
+		"access_token": "EEOJh0hT8g7hZcJDH2PGOVV44WfJHmnlnJ3QsmqhuJZcnzLrUSTUhUbi4oQUYSYLzmCkQw3mIR0ff60Q",
+		"token_type": "Bearer",
+		"expires": 1491300443,
+		"expires_in": 5184000
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 500
+ 
+ ```json
+ {
+	"name": "Internal Server Error",
+	"message": "There was an error at the server.",
+	"code": 0,
+	"status": 500
+}
+```
+
+
+## Login
+
+This api is used for user login.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/mobapi/login`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+username | Yes | It should be user's email address.
+password | Yes | It should be user's password.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"msg": {
+		"access_token": "7PoRmE9vFXr70CeaxzEFAmlZdxCze7ZkHog6RgpkBurspzFcaParmRxODzcaIsAMQ3n6pEn9ywLpCH5D",
+		"token_type": "Bearer",
+		"expires": 1491216307,
+		"expires_in": 5184000
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 200
+ 
+ ```json
+ {
+	"error": 1,
+	"msg": "We didn't recognize the email address and/or password. Please try again"
+}
+```
+
+## Verify Accesstoken
+
+This api is used for verifying user's accesstoken.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/ping`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"msg": {
+		"access_token": "wYa03y3DqabDnbP0W35woLsNAVCeNkyAQzjKMG9jmPLCgfT60XE1P2IRaNuZwErWoBzOXzVWj2ADE4wq",
+		"token_type": "Bearer",
+		"expires": 1491198181,
+		"expires_in": 5184000
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
 # Accounts
 
 ## Get All Accounts
 
-This endpoint retrieves all kittens.
+This api is used for fetching all accounts.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET https://panel.socialpilot.co/oauth/accounts`
 
 ### Query Parameters
 
-Parameter | Default | Description
+Parameter | Required | Description
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+>Example Success Response:
 
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+>Response Code: 200
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+[{
+	"id": "81087",
+	"nickname": "My books",
+	"url": "https:\/\/www.facebook.com\/rutulssss\/",
+	"access_type": "O",
+	"profile_picture": "https:\/\/scontent.xx.fbcdn.net\/v\/t1.0-1\/c15.0.50.50\/p50x50\/399548_10149999285987789_1102888142_n.png?oh=bdf22659929b60d2530a472381162098&oe=590DF16A",
+	"status": "Running",
+	"account_type": "facebook-official",
+	"groups": [],
+	"timeslots": [{
+		"day": "Sun",
+		"slot": [{
+			"slot_id": "2616999",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2616997",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2616998",
+			"timevalue": "08:08 PM"
+		}]
+	}, {
+		"day": "Mon",
+		"slot": [{
+			"slot_id": "2617002",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2617000",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2617001",
+			"timevalue": "08:08 PM"
+		}]
+	}, {
+		"day": "Tue",
+		"slot": [{
+			"slot_id": "2617005",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2617003",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2617004",
+			"timevalue": "08:08 PM"
+		}]
+	}, {
+		"day": "Wed",
+		"slot": [{
+			"slot_id": "2617008",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2617006",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2617007",
+			"timevalue": "08:08 PM"
+		}]
+	}, {
+		"day": "Thu",
+		"slot": [{
+			"slot_id": "2617012",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2617009",
+			"timevalue": "04:51 PM"
+		}, {
+			"slot_id": "2617010",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2617011",
+			"timevalue": "08:08 PM"
+		}]
+	}, {
+		"day": "Fri",
+		"slot": [{
+			"slot_id": "2617015",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2617013",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2617014",
+			"timevalue": "08:08 PM"
+		}]
+	}, {
+		"day": "Sat",
+		"slot": [{
+			"slot_id": "2617018",
+			"timevalue": "10:36 AM"
+		}, {
+			"slot_id": "2617016",
+			"timevalue": "06:28 PM"
+		}, {
+			"slot_id": "2617017",
+			"timevalue": "08:08 PM"
+		}]
+	}]
+}, {
+	"id": "114976",
+	"nickname": "SocialPilot.co",
+	"url": "https:\/\/www.xing.com\/companies\/socialpilot.co",
+	"access_type": "O",
+	"profile_picture": "https:\/\/www.xing.com\/img\/custom\/cp\/assets\/logo\/4\/3\/0\/308272\/image_192px\/logo_230.jpg",
+	"status": "Running",
+	"account_type": "xing-square",
+	"groups": [],
+	"timeslots": [{
+		"day": "Sun",
+		"slot": [{
+			"slot_id": "2616978",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616976",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616977",
+			"timevalue": "09:09 PM"
+		}]
+	}, {
+		"day": "Mon",
+		"slot": [{
+			"slot_id": "2616981",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616979",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616980",
+			"timevalue": "09:09 PM"
+		}]
+	}, {
+		"day": "Tue",
+		"slot": [{
+			"slot_id": "2616984",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616982",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616983",
+			"timevalue": "09:09 PM"
+		}]
+	}, {
+		"day": "Wed",
+		"slot": [{
+			"slot_id": "2616987",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616985",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616986",
+			"timevalue": "09:09 PM"
+		}]
+	}, {
+		"day": "Thu",
+		"slot": [{
+			"slot_id": "2616990",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616988",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616989",
+			"timevalue": "09:09 PM"
+		}]
+	}, {
+		"day": "Fri",
+		"slot": [{
+			"slot_id": "2616993",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616991",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616992",
+			"timevalue": "09:09 PM"
+		}]
+	}, {
+		"day": "Sat",
+		"slot": [{
+			"slot_id": "2616996",
+			"timevalue": "10:34 AM"
+		}, {
+			"slot_id": "2616994",
+			"timevalue": "03:54 PM"
+		}, {
+			"slot_id": "2616995",
+			"timevalue": "09:09 PM"
+		}]
+	}]
+}]
 ```
 
-This endpoint retrieves all kittens.
+> Example Error Response:
 
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
 }
 ```
 
-This endpoint retrieves a specific kitten.
+## Connect Accounts
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+This API will used to connect to account
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://panel.socialpilot.co/oauth/connectaccounts`
 
-### URL Parameters
+### Query Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"account": [{
+		"account_name": "Twitter Profile",
+		"account_type": "twitter",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ftwitter"
+			}]
+		}]
+	}, {
+		"account_name": "Facebook Profile",
+		"account_type": "facebook",
+		"account_data": [{
+			"data_title": "Connect new FB Account",
+			"data_field": [{
+				"name": "Use Default Setting",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffacebook"
+			}]
+		}, {
+			"data_title": "Custom FB Branding",
+			"data_field": [{
+				"name": "test",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffbbranding%253Fapp_id%253D599"
+			}, {
+				"name": "test12",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffbbranding%253Fapp_id%253D613"
+			}]
+		}]
+	}, {
+		"account_name": "Facebook Page",
+		"account_type": "facebook-official",
+		"account_data": [{
+			"data_title": "Connected Accounts",
+			"data_field": [{
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D36403"
+			}, {
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D88177"
+			}, {
+				"name": "Ronak Patel",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D88565"
+			}]
+		}, {
+			"data_title": "Connect with new FB Account",
+			"data_field": [{
+				"name": "Use Default Setting",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffacebook%253Ftype%253Dpage"
+			}]
+		}, {
+			"data_title": "Custom FB Branding",
+			"data_field": [{
+				"name": "test",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffbbranding%253Ftype%253Dpage%2526app_id%253D599"
+			}, {
+				"name": "test12",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffbbranding%253Ftype%253Dpage%2526app_id%253D613"
+			}]
+		}]
+	}, {
+		"account_name": "Facebook Group",
+		"account_type": "users",
+		"account_data": [{
+			"data_title": "Connected Accounts",
+			"data_field": [{
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgroup%253Flogin_id%253D36403"
+			}, {
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgroup%253Flogin_id%253D88177"
+			}, {
+				"name": "Ronak Patel",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgroup%253Flogin_id%253D88565"
+			}]
+		}, {
+			"data_title": "Connect with new FB Account",
+			"data_field": [{
+				"name": "Use Default Setting",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffacebook%253Ftype%253Dgroup"
+			}]
+		}, {
+			"data_title": "Custom FB Branding",
+			"data_field": [{
+				"name": "test",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffbbranding%253Fgroup%253Dpage%2526app_id%253D599"
+			}, {
+				"name": "test12",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ffbbranding%253Fgroup%253Dpage%2526app_id%253D613"
+			}]
+		}]
+	}, {
+		"account_name": "LinkedIn Profile",
+		"account_type": "linkedin",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Flinkedin"
+			}]
+		}]
+	}, {
+		"account_name": "LinkedIn Page",
+		"account_type": "suitcase",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "rutull gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D59621"
+			}, {
+				"name": "jigar testaccount",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D99578"
+			}, {
+				"name": "Connect with new LinkedIn Account",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Flinkedin%253Ftype%253Dpage"
+			}]
+		}]
+	}, {
+		"account_name": "LinkedIn Group",
+		"account_type": "linkedin-square",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "rutull gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgroup%253Flogin_id%253D59621"
+			}, {
+				"name": "jigar testaccount",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgroup%253Flogin_id%253D99578"
+			}, {
+				"name": "Connect with new LinkedIn Account",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Flinkedin%253Ftype%253Dgroup"
+			}]
+		}]
+	}, {
+		"account_name": "Pinterest Board",
+		"account_type": "pinterest-p",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a Board",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpinterestauth"
+			}]
+		}]
+	}, {
+		"account_name": "Vk Profile",
+		"account_type": "vk",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fvkauth"
+			}]
+		}]
+	}, {
+		"account_name": "Vk Community",
+		"account_type": "vk-group",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgroup%253Flogin_id%253D35734"
+			}, {
+				"name": "Connect with new Vk.com Account",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fvkauth%253Ftype%253Dgroup"
+			}]
+		}]
+	}, {
+		"account_name": "Xing Profile",
+		"account_type": "xing",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fxingauth"
+			}]
+		}]
+	}, {
+		"account_name": "Xing Pages",
+		"account_type": "xing-square",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "rutul gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D71511"
+			}, {
+				"name": "ronak patel",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D112444"
+			}, {
+				"name": "Jimit Bagadiya",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D116583"
+			}, {
+				"name": "Connect with new Xing Account",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fxingauth%253Ftype%253Dpage"
+			}]
+		}]
+	}, {
+		"account_name": "Tumblr Blog",
+		"account_type": "tumblr",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a Blog",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Ftumblrauth"
+			}]
+		}]
+	}, {
+		"account_name": "Instagram",
+		"account_type": "instagram",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Finstamoblogin"
+			}]
+		}]
+	}, {
+		"account_name": "Google+ Profile",
+		"account_type": "google-plus",
+		"account_data": [{
+			"data_title": "",
+			"data_field": [{
+				"name": "connect a profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgoogleauth"
+			}]
+		}]
+	}, {
+		"account_name": "Google+ Page",
+		"account_type": "google-plus-square",
+		"account_data": [{
+			"data_title": "Connected Accounts",
+			"data_field": [{
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fpage%253Flogin_id%253D80048"
+			}, {
+				"name": "Connect with new Google+ profile",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fgoogleauth%253Ftype%253Dpage"
+			}]
+		}]
+	}, {
+		"account_name": "Google+ Collection",
+		"account_type": "google-plus-official",
+		"account_data": [{
+			"data_title": "Connect a collection",
+			"data_field": [{
+				"name": "music",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fcollection%253Flogin_id%253D80044"
+			}, {
+				"name": "Rutul Gajjar",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fcollection%253Flogin_id%253D80048"
+			}, {
+				"name": "my page",
+				"url": "https:\/\/panel.socialpilot.co\/oauth\/accountredirect?url=https%253A%252F%252Fpanel.socialpilot.co%252Faccounts%252Fcollection%253Flogin_id%253D88190"
+			}]
+		}]
+	}]
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Edit Account
+
+This api is used to edit account's name.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/account/update/{ACCOUNT_ID}`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your own account id in above api.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"id": 41342
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+## Delete Account
+
+This api is used to delete account.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/account/delete/{ACCOUNT_ID}`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your own account id in above API.
+</aside>
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Update Account Status
+
+This API is used to update account status.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/account/status/{ACCOUNT_ID}`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your own account id in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+ {
+ 	"error": 0,
+ 	"data": {
+ 		"new_status": "Paused"
+ 	}
+ }
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+## Add Account To Group
+
+This API is used to add account to specific group.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/account/add/{ACCOUNT_ID}`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your own account id in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+group_id | Yes | It should be group_id to which you want to add your account.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"id": 36403
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+
+## Delete Account From Group
+
+This API is used to delete account from specific group.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/account/remove/{ACCOUNT_ID}`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your own account id in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+group_id | Yes | It should be group_id to which you want to add your account.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"id": 36403
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+## Add TimeSlot
+
+This API is used to add timeslot.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/timeslot/create/{ACCOUNT_ID}`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your account_id in which you want to add new timeslot in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+time_zone | Yes | It should be time_zone retrieve in response of settings web service.
+timeslot | Yes | It should be time you like to schedule.
+dayname[position] | Yes | It should be day name to which you want to add timeslot.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"slot_day": [{
+		"day": "Tue",
+		"slot_id": ""
+	}, {
+		"day": "Fri",
+		"slot_id": "2679643"
+	}, {
+		"day": "Thu",
+		"slot_id": "2679644"
+	}]
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Delete TimeSlot
+
+This API is used to delete timeslot.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/timeslot/delete/{SLOT_ID}`
+
+<aside class="notice">
+You must replace <code>{SLOT_ID}</code> with your slot_id which you want to delete in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+
+```json
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+# Groups
+
+## Get All Groups
+
+This api is used for fetching all groups.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/groups`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+[{
+	"id": "17277",
+	"group_name": "Test12345",
+	"group_desc": "yyttty",
+	"accounts": [{
+		"id": "88193",
+		"nickname": "mytestblog",
+		"url": "http:\/\/mytestblog.tumblr.com\/",
+		"status": "Running",
+		"account_type": "tumblr"
+	}, {
+		"id": "35734",
+		"nickname": "Rutul Gajjar",
+		"url": "https:\/\/vk.com\/id306627681",
+		"status": "Running",
+		"account_type": "vk"
+	}, {
+		"id": "7696",
+		"nickname": "Jimit Bagadiya",
+		"url": "https:\/\/vk.com\/id305615613",
+		"status": "Running",
+		"account_type": "vk"
+	}, {
+		"id": "42791",
+		"nickname": "my business",
+		"url": "http:\/\/vk.com\/club99796837",
+		"status": "Running",
+		"account_type": "vk-group"
+	}, {
+		"id": "71512",
+		"nickname": "super-rutul",
+		"url": "http:\/\/super-rutul.tumblr.com\/",
+		"status": "Running",
+		"account_type": "tumblr"
+	}, {
+		"id": "108468",
+		"nickname": "Creative Glance",
+		"url": "https:\/\/www.pinterest.com\/jbagadiya\/creative-glance\/",
+		"status": "Running",
+		"account_type": "pinterest-p"
+	}, {
+		"id": "71527",
+		"nickname": "test1",
+		"url": "https:\/\/www.pinterest.com\/rutulg\/test1\/",
+		"status": "Running",
+		"account_type": "pinterest-p"
+	}, {
+		"id": "108469",
+		"nickname": "Mobile Apps",
+		"url": "https:\/\/www.pinterest.com\/jbagadiya\/mobile-apps\/",
+		"status": "Running",
+		"account_type": "pinterest-p"
+	}, {
+		"id": "99580",
+		"nickname": "tes4",
+		"url": "https:\/\/www.pinterest.com\/rutulg\/tes4\/",
+		"status": "Running",
+		"account_type": "pinterest-p"
+	}, {
+		"id": "53140",
+		"nickname": "testing2",
+		"url": "https:\/\/www.pinterest.com\/rutulg\/testing2\/",
+		"status": "Running",
+		"account_type": "pinterest-p"
+	}, {
+		"id": "80044",
+		"nickname": "music",
+		"url": "https:\/\/plus.google.com\/104651522595299228273",
+		"status": "Running",
+		"account_type": "google-plus-square"
+	}, {
+		"id": "88190",
+		"nickname": "my page",
+		"url": "https:\/\/plus.google.com\/105760589956175049099",
+		"status": "Running",
+		"account_type": "google-plus-square"
+	}, {
+		"id": "80046",
+		"nickname": "music collection",
+		"url": "https:\/\/plus.google.com\/collection\/kV2FkB",
+		"status": "Running",
+		"account_type": "google-plus-official"
+	}, {
+		"id": "99832",
+		"nickname": "SocialPilot",
+		"url": "http:\/\/www.linkedin.com\/company\/socialpilot",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "59755",
+		"nickname": "Mento.io",
+		"url": "http:\/\/www.linkedin.com\/company\/mento-io",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "99834",
+		"nickname": "PocketApp.co",
+		"url": "http:\/\/www.linkedin.com\/company\/pocketapps.co",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "42788",
+		"nickname": "Android",
+		"url": "http:\/\/vk.com\/club107731330",
+		"status": "Running",
+		"account_type": "vk-group"
+	}, {
+		"id": "88177",
+		"nickname": "Rutul Gajjar",
+		"url": "https:\/\/www.facebook.com\/app_scoped_user_id\/269607903400321\/",
+		"status": "Running",
+		"account_type": "facebook"
+	}, {
+		"id": "71511",
+		"nickname": "rutul gajjar",
+		"url": "https:\/\/www.xing.com\/profile\/rutul_gajjar",
+		"status": "Running",
+		"account_type": "xing"
+	}, {
+		"id": "93017",
+		"nickname": "harshil",
+		"url": "https:\/\/www.instagram.com\/",
+		"status": "Running",
+		"account_type": "instagram"
+	}, {
+		"id": "99581",
+		"nickname": "rutul123",
+		"url": "https:\/\/www.instagram.com\/",
+		"status": "Running",
+		"account_type": "instagram"
+	}]
+}, {
+	"id": "17279",
+	"group_name": "Ghfhfhfbfhhh1",
+	"group_desc": "",
+	"accounts": [{
+		"id": "810",
+		"nickname": "SocialPilot",
+		"url": "http:\/\/www.twitter.com\/socialpilot_co",
+		"status": "Running",
+		"account_type": "twitter"
+	}, {
+		"id": "36403",
+		"nickname": "Rutul Gajjar",
+		"url": "https:\/\/www.facebook.com\/app_scoped_user_id\/111494222545024\/",
+		"status": "Running",
+		"account_type": "facebook"
+	}, {
+		"id": "74156",
+		"nickname": "jigar_murabiya",
+		"url": "http:\/\/www.twitter.com\/jigar_murabiya",
+		"status": "Running",
+		"account_type": "twitter"
+	}, {
+		"id": "80048",
+		"nickname": "Rutul Gajjar",
+		"url": "https:\/\/plus.google.com\/104837002510557825022",
+		"status": "Running",
+		"account_type": "google-plus"
+	}, {
+		"id": "71512",
+		"nickname": "super-rutul",
+		"url": "http:\/\/super-rutul.tumblr.com\/",
+		"status": "Running",
+		"account_type": "tumblr"
+	}, {
+		"id": "88193",
+		"nickname": "mytestblog",
+		"url": "http:\/\/mytestblog.tumblr.com\/",
+		"status": "Running",
+		"account_type": "tumblr"
+	}, {
+		"id": "7696",
+		"nickname": "Jimit Bagadiya",
+		"url": "https:\/\/vk.com\/id305615613",
+		"status": "Running",
+		"account_type": "vk"
+	}, {
+		"id": "35734",
+		"nickname": "Rutul Gajjar",
+		"url": "https:\/\/vk.com\/id306627681",
+		"status": "Running",
+		"account_type": "vk"
+	}, {
+		"id": "80044",
+		"nickname": "music",
+		"url": "https:\/\/plus.google.com\/104651522595299228273",
+		"status": "Running",
+		"account_type": "google-plus-square"
+	}, {
+		"id": "88190",
+		"nickname": "my page",
+		"url": "https:\/\/plus.google.com\/105760589956175049099",
+		"status": "Running",
+		"account_type": "google-plus-square"
+	}, {
+		"id": "99832",
+		"nickname": "SocialPilot",
+		"url": "http:\/\/www.linkedin.com\/company\/socialpilot",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "99833",
+		"nickname": "Creative Glance Technologies",
+		"url": "http:\/\/www.linkedin.com\/company\/creative-glance-technologies",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "59755",
+		"nickname": "Mento.io",
+		"url": "http:\/\/www.linkedin.com\/company\/mento-io",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "99834",
+		"nickname": "PocketApp.co",
+		"url": "http:\/\/www.linkedin.com\/company\/pocketapps.co",
+		"status": "Running",
+		"account_type": "suitcase"
+	}, {
+		"id": "42788",
+		"nickname": "Android",
+		"url": "http:\/\/vk.com\/club107731330",
+		"status": "Running",
+		"account_type": "vk-group"
+	}, {
+		"id": "88177",
+		"nickname": "Rutul Gajjar",
+		"url": "https:\/\/www.facebook.com\/app_scoped_user_id\/269607903400321\/",
+		"status": "Running",
+		"account_type": "facebook"
+	}, {
+		"id": "99578",
+		"nickname": "jigar testaccount",
+		"url": "http:\/\/www.linkedin.com\/profile\/view?id=PgAvYfSBXo",
+		"status": "Paused",
+		"account_type": "linkedin"
+	}, {
+		"id": "41342",
+		"nickname": "rutul110",
+		"url": "http:\/\/www.twitter.com\/rutul110",
+		"status": "Running",
+		"account_type": "twitter"
+	}, {
+		"id": "103085",
+		"nickname": "Test123",
+		"url": "https:\/\/www.facebook.com\/Test-1351588231539525\/",
+		"status": "Paused",
+		"account_type": "facebook-official"
+	}]
+}]
+```
+
+> Example Error Response:
+
+>Response Code: 401
+
+```json
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+
+## Create Group
+
+This api is used to create new group.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/group/create`
+
+<aside class="notice">
+You must replace <code>{ACCOUNT_ID}</code> with your own account id in above API.
+</aside>
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+group_name | Yes | It should be name with at least 5 characters.
+description | No | Whatever description you like to add about this group.
+account_id[position] | No | It should be account_id of account which you want to add in this group.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"group_id": "20687"
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+
+```json
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Delete Group
+
+This api is used to delete group.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/group/delete/{GROUP_ID}`
+
+<aside class="notice">
+You must replace <code>{GROUP_ID}</code> with your own group id in above API.
+</aside>
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Edit Group
+
+This api is used to edit group details.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/group/update/{GROUP_ID}`
+
+<aside class="notice">
+You must replace <code>{GROUP_ID}</code> with your own group id in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+group_name | Yes | It should be name of group at least of 5 characters.
+description | No | It should be description of your group.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"group_id": "20687"
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+
+```json
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Add Group To Account
+
+This API is used to add account to this group.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/group/add/{GROUP_ID}`
+
+<aside class="notice">
+You must replace <code>{GROUP_ID}</code> with your own group id in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+account_id | Yes | It should be account_id which you want to add to this group.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"group_id": "19677"
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+## Delete Group From Account
+
+This API is used to delete account from this group.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/group/remove/{GROUP_ID}`
+
+<aside class="notice">
+You must replace <code>{GROUP_ID}</code> with your own group id in above API.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+account_id | Yes | It should be account_id which you want to delete from this group.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"group_id": "19677"
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+# Settings
+
+## Get All Settings
+
+This api is used to fetch all settings.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/settings`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+[{
+	"key": "is_active",
+	"value": "Y"
+}, {
+	"key": "time_zone",
+	"value": "+05:30"
+}, {
+	"key": "time_zone_full",
+	"value": "Asia\/Calcutta"
+}, {
+	"key": "membership",
+	"value": "10"
+}, {
+	"key": "url_shortner",
+	"value": "1"
+}, {
+	"key": "bitly_token",
+	"value": "p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr"
+}, {
+	"key": "trial_used",
+	"value": "Y"
+}, {
+	"key": "user_type",
+	"value": "I"
+}, {
+	"key": "country",
+	"value": "India"
+}, {
+	"key": "last_login_country",
+	"value": "India"
+}, {
+	"key": "company_id",
+	"value": "12416"
+}, {
+	"key": "s_id",
+	"value": "16"
+}]
+```
+
+> Example Error Response:
+
+>Response Code: 401
+
+```json
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+# Device Token
+
+## Send Device Token
+
+This api is used to send device token to server.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/devicetoken`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+version | Yes | It should be current version of your app same as in your app level build.gradle file.
+device_token | Yes | It should be device token received from FCM server.
+device_model | Yes | It should be your device's model.
+app_version | Yes | It should be current version of your app same as in your app level build.gradle file.
+os | Yes | It should be os of your device.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+# Posts
+
+## Queued Posts
+
+This api is used for fetching queued posts.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/queue`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"posts": [{
+		"log_id": "5603984",
+		"post_date": "8 Feb, 2017",
+		"posttime": "2017-02-08 03:57 PM",
+		"posttime_format": "Feb 08, 03:57 PM",
+		"account": {
+			"account_id": "35734",
+			"account_url": "https:\/\/vk.com\/id306627681",
+			"account_username": "Rutul Gajjar",
+			"account_type": "vk"
+		},
+		"post_content": "Proven Strategies to Boost Social Media Shares and Conversions  http:\/\/bitly.com\/2kRe41N",
+		"post_image": "https:\/\/socialpilot.co\/wp-content\/uploads\/2017\/02\/social-media-shares-fb.png",
+		"created_on": "2017-02-01 13:59:04",
+		"post_url": "https:\/\/socialpilot.co\/blog\/proven-strategies-to-boost-social-media-shares-and-conversions\/",
+		"is_paused": "N",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=https:\/\/socialpilot.co\/wp-content\/uploads\/2017\/02\/social-media-shares-fb.png",
+		"is_auto": "Y",
+		"access_type": "O",
+		"via": "Feed",
+		"by": "rutul"
+	}],
+	"queuecnt": 1
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Unscheduled Posts
+
+This api is used for fetching unscheduled posts.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/unscheduled`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+
+
+>Example Success Response:
+
+>Response Code: 200
+
+><aside class="notice">
+If "nextpage" parameter in below response contains any url, just call this url for pagination.
+</aside>
+
+```json
+{
+	"posts": [{
+		"log_id": "5598009",
+		"account": {
+			"account_id": 99581,
+			"account_url": "https:\/\/www.instagram.com\/",
+			"account_username": "rutul123",
+			"account_type": "instagram"
+		},
+		"post_content": "Get Moving! 4 Urgent Reasons You Should Sell Your Home in 2017 https:\/\/goo.gl\/Jfkisi",
+		"post_image": "http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
+		"post_status": "L",
+		"post_url": "https:\/\/goo.gl\/Jfkisi",
+		"is_paused": "N",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
+		"access_type": "O",
+		"via": "Mobile App",
+		"created_on": "2017-02-01 11:05:32",
+		"by": "rutul"
+	}, {
+		"log_id": "5403080",
+		"account": {
+			"account_id": 42788,
+			"account_url": "http:\/\/vk.com\/club107731330",
+			"account_username": "Android",
+			"account_type": "vk-group"
+		},
+		"post_content": "sdf",
+		"post_image": "",
+		"post_status": "L",
+		"post_url": "",
+		"is_paused": "N",
+		"thumb_image": "",
+		"access_type": "O",
+		"via": "Web",
+		"created_on": "2017-01-25 12:03:28",
+		"by": "rutul"
+	}, {
+		"log_id": "5403078",
+		"account": {
+			"account_id": 42788,
+			"account_url": "http:\/\/vk.com\/club107731330",
+			"account_username": "Android",
+			"account_type": "vk-group"
+		},
+		"post_content": "sdf",
+		"post_image": "",
+		"post_status": "L",
+		"post_url": "",
+		"is_paused": "N",
+		"thumb_image": "",
+		"access_type": "O",
+		"via": "Web",
+		"created_on": "2017-01-25 12:03:28",
+		"by": "rutul"
+	}],
+	"nextpage": "",
+	"recordcnt": 3
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Error Posts
+
+This api is used for fetching error posts.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/errors`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+
+>Example Success Response:
+
+>Response Code: 200
+
+><aside class="notice">
+If "nextpage" parameter in below response contains any url, just call this url for pagination.
+</aside>
+
+```json
+{
+	"posts": [{
+		"log_id": "5598892",
+		"account": {
+			"account_id": 93017,
+			"account_url": "https:\/\/www.instagram.com\/",
+			"account_username": "harshil",
+			"account_type": "instagram"
+		},
+		"post_content": "\u00bfDeberias mentir en una entrevista de trabajo? https:\/\/goo.gl\/BWlPiQ ",
+		"error_msg": "Install SocialPilot mobile apps for Instagram Reminder",
+		"post_image": "http:\/\/cazatutrabajo.com\/wp-content\/uploads\/2014\/02\/mentir-entrevista-trabajo.jpg",
+		"post_url": "https:\/\/goo.gl\/BWlPiQ",
+		"posttime_format": "02-Feb-2017 04:22 PM",
+		"is_paused": "N",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/cazatutrabajo.com\/wp-content\/uploads\/2014\/02\/mentir-entrevista-trabajo.jpg",
+		"access_type": "O",
+		"via": "Mobile App",
+		"created_on": "2017-02-01 11:33:02",
+		"by": "rutul"
+	}],
+	"nextpage": "",
+	"recordcnt": 3
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Delivered Posts
+
+This api is used for fetching delivered posts.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/deliverd`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+
+>Example Success Response:
+
+><aside class="notice">
+If "nextpage" parameter in below response contains any url, just call this url for pagination.
+</aside>
+
+>Response Code: 200
+
+```json
+{
+	"posts": [{
+		"log_id": "5583775",
+		"account": {
+			"account_id": 88190,
+			"account_url": "https:\/\/plus.google.com\/105760589956175049099",
+			"account_username": "my page",
+			"is_deleted": "N",
+			"account_type": "google-plus-square"
+		},
+		"post_content": "Get Moving! 4 Urgent Reasons You Should Sell Your Home in 2017 https:\/\/goo.gl\/Jfkisi",
+		"post_image": "http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
+		"post_type": "T",
+		"post_url": "https:\/\/goo.gl\/Jfkisi",
+		"posttime_format": "02-Feb-2017 10:39 AM",
+		"is_paused": "N",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
+		"access_type": "O",
+		"via": "Mobile App",
+		"created_on": "2017-02-01 07:15:05",
+		"by": "rutul"
+	}],
+	"nextpage": "https:\/\/panel.socialpilot.co\/oauth\/post\/deliverd\/2",
+	"recordcnt": 1513
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Contributed Posts
+
+This api is used for fetching delivered posts.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/contribute`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+
+>Example Success Response:
+
+><aside class="notice">
+If "nextpage" parameter in below response contains any url, just call this url for pagination.
+</aside>
+
+>Response Code: 200
+
+```json
+{
+	"posts": [],
+	"nextpage": "",
+	"recordcnt": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Create Post without image
+
+This api is used for creating new post without image.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/post/update`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+group_id | No | A group id whose associated accounts will receive the status update. Invalid ids will be ignored.
+now | No | If now is set to true, this update will be sent immediately.
+schedule_date | No | A date describing when the update should be posted. Overrides now parameter. If no UTC offset is specified, UTC is assumed.
+post_content | Yes | It should be post content you edited.
+account_id[position] | Yes | It should be account id from which you are creating this post.
+preview[title]| No | A preview title
+preview[url]| No |An URL of the preview title
+preview[image]| No | A preview image path
+preview[description]| No | A short description for the preview
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"post_id": ""
+	},
+	"msg": "Post successfully created!",
+	"is_break": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "Invalid post data"
+}
+```
+
+## Create Post with image
+
+This api is used for creating new post with image.
+
+### HTTP Request
+
+####Create post with image
+
+`POST https://panel.socialpilot.co/oauth/post/updatewithimage`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+group_id | No | A group id whose associated accounts will receive the status update. Invalid ids will be ignored.
+post_content | No | It should be post content you edited.
+account_id[position] | Yes | It should be account id from which you are creating this post.
+post_image| Yes | It should be image in multipart form.
+now | No | If now is set to true, this update will be sent immediately.
+schedule_date | No | A date describing when the update should be posted. Overrides now parameter. If no UTC offset is specified, UTC is assumed.
+image_url| No | Url of the image.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"data": {
+		"post_id": ""
+	},
+	"msg": "Post successfully created!",
+	"is_break": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "Missing data"
+}
+```
+
+## Delete Post
+
+This api is used for deleting post.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/delete/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+from | No | It should be only in case of contributed posts.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Something went wrong. Try again later."
+}
+```
+
+## Move To Top Post
+
+This api is used for moving post to top.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/movetotop/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Share Post
+
+This api is used for sharing the post.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/sharenow/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+from | No | It should be only in case of error posts.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Schedule Post
+
+This api is used for sharing the post.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/post/shareon/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+postdate | Yes | It should be date on which you want to schedule your post.
+posttime | Yes | It should be time on when want to schedule your post.
+from | No | It should be only in case of error posts.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Add To Queue
+
+This api is to add post to queue.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/post/addtoqueue/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+from | No | It should be only in case of error posts.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Approve
+
+This api is to approve post for contribution.
+
+### HTTP Request
+
+`POST https://panel.socialpilot.co/oauth/post/approve/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Edit Post
+
+This api is used for editing post.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/post/movetotop/{POST_ID}`
+
+<aside class="notice">
+<code>{POST_ID}</code> is to be replaced with your post_id.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+post_content| No | It is compulsory to write content if you are not attaching image.
+is_removed | Yes | Either Y or N.
+from | No | It should be only in case of contributed posts. 
+post_image | No | Image in the form of multipart.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"img_url": "https:\/\/socialpilotassets.s3.amazonaws.com\/postsimages\/dgxvv820ob2afu4.jpg"
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "<div><ul><li>Content cannot be blank</li></ul></div>"
+}
+```
+
+# Suggestions
+
+## Get Suggestion Categories
+
+This api is used for fetching categories of suggestions.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/suggestion/category`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+[{
+	"name": "Business",
+	"id": "2"
+}, {
+	"name": "Car & Vehicles",
+	"id": "3"
+}, {
+	"name": "Construction & Real Estate",
+	"id": "16"
+}, {
+	"name": "Education",
+	"id": "15"
+}, {
+	"name": "Fashion",
+	"id": "6"
+}, {
+	"name": "Health & Fitness",
+	"id": "13"
+}, {
+	"name": "Inspiration",
+	"id": "11"
+}, {
+	"name": "Lifehacking",
+	"id": "14"
+}, {
+	"name": "Marketing",
+	"id": "4"
+}, {
+	"name": "Photography",
+	"id": "7"
+}, {
+	"name": "Sports",
+	"id": "17"
+}, {
+	"name": "Startups",
+	"id": "5"
+}, {
+	"name": "Tech",
+	"id": "1"
+}, {
+	"name": "Travel",
+	"id": "9"
+}]
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Get Suggestions
+
+This api is used for fetching suggestions.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/suggestionwithpage`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+nextpage | No | If pagination is to be performed, use this parameter.
+id | No | If suggestions are to be filtered using category id.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"data": [{
+		"id": "36855",
+		"post_content": "Here are the world's largest weapons exporters https:\/\/goo.gl\/cPXCBj",
+		"description": "Here are the world\\'s largest weapons exporters",
+		"title": "Here are the world's largest weapons exporters",
+		"category": {
+			"id": 2,
+			"name": "Business"
+		},
+		"image": "",
+		"url": "https:\/\/goo.gl\/cPXCBj"
+	}, {
+		"id": "36860",
+		"post_content": "When You Learn A Second Language, These 7 Amazing Things Will Happen To You https:\/\/goo.gl\/TlMHPG",
+		"description": "When You Learn A Second Language, These 7 Amazing Things Will Happen To You",
+		"title": "When You Learn A Second Language, These 7 Amazing Things Will Happen To You",
+		"category": {
+			"id": 14,
+			"name": "Lifehacking"
+			},
+		"image": "http:\/\/i.amz.mshcdn.com\/KSCQeXebHwkv6YMcpm-JU549ze4=\/575x323\/filters:quality(90)\/https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com%2Fuploads%2Fcard%2Fimage%2F364966%2F08147d4b-988a-4a3f-b23d-4f2838a2a4b5.jpg",
+		"url": "https:\/\/goo.gl\/Jwyx0o"
+	}],
+	"nextpage": "https:\/\/panel.socialpilot.co\/oauth\/suggetionwithpage?nextpage=3",
+	"recordcnt": 16180,
+	"s_id": 0
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+# Feeds
+
+## Get Feed Categories
+
+This api is used for fetching categories of feeds.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/getfeednames`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"feed": [{
+		"name": "Juhi",
+		"id": "2108"
+	}, {
+		"name": "Digisha",
+		"id": "2148"
+	}, {
+		"name": "socialpilot",
+		"id": "3249"
+	}]
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Get Feeds
+
+This api is used for fetching feeds.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/getfeeds`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+id | No | If feeds are to be filtered using category id.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"recordcnt": 40,
+	"pfeed": [{
+		"account_id": ["59155", "69245"]
+	}, {
+		"account_id": ["59155", "69245"]
+	}, {
+		"account_id": ["35734"]
+	}],
+	"feeds": [{
+		"post_title": "Mobile recharge shops in India's largest state are selling phone numbers of young girls: Report",
+		"post_url": "http:\/\/mashable.com\/2017\/02\/03\/mobile-recharge-outlets-sell-phone-number-girls-india\/",
+		"post_image": "http:\/\/i.amz.mshcdn.com\/XROe_CSVCpJFzyOwtEEHhCRe1iw=\/575x323\/filters:quality(90)\/https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com%2Fuploads%2Fcard%2Fimage%2F371091%2Fb58c8b7b-b86a-4604-a502-c38fa4b0d03a.jpg",
+		"long_post_desc": "A new safety issue has surfaced for young girls in northern India.&nbsp; Phone recharge shops in Uttar Pradesh, India's largest state by geography, are reportedly selling mobile phone numbers of innocent girls. SEE ALSO: Women in this country are marching for their right to go out Local police say t&hellip;",
+		"via": "Mashable",
+		"Published": "Published on Feb 03, 2017 09:01 AM",
+		"post_desc": "Mobile recharge shops in India's largest state are selling phone numbers of young girls: Report - http:\/\/mashable.com\/2017\/02\/03\/mobile-recharge-outlets-sell-phone-number-girls-india\/"
+	}, {
+		"post_title": "Samsung Pay to launch in India in first half of 2017",
+		"post_url": "http:\/\/mashable.com\/2017\/02\/03\/samsung-pay-india-launch\/",
+		"post_image": "http:\/\/i.amz.mshcdn.com\/Jht2watZczziqMLuYvoRVlcewqo=\/575x323\/filters:quality(90)\/https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com%2Fuploads%2Fcard%2Fimage%2F371059%2F12563067-f3e5-4be4-84db-20bb7535c6a7.jpg",
+		"long_post_desc": "Domestic companies cashing in on India&rsquo;s cash crunched market with epayment solutions will soon have competition from a global technology giant &mdash; Samsung. SEE ALSO: Google is thinking about bringing digital payment services to India Samsung plans to launch its Samsung Pay mobile payment&hellip;",
+		"via": "Mashable",
+		"Published": "Published on Feb 03, 2017 08:32 AM",
+		"post_desc": "Samsung Pay to launch in India in first half of 2017 - http:\/\/mashable.com\/2017\/02\/03\/samsung-pay-india-launch\/"
+	}]
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+# Update Status
+
+## Update Status
+
+This API is used to update account status.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/updatestatus`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+ {
+	"error": 0,
+	"status": "Paused"
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+
+
+
+
 
