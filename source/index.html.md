@@ -10,8 +10,6 @@ toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
   - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
 
-includes:
-  - errors
 
 search: true
 ---
@@ -19,18 +17,6 @@ search: true
 # Introduction
 
 Welcome to the SocialPilot API!
-
-# Authentication
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
 
 # Authenticate User
 
@@ -48,9 +34,6 @@ Parameter | Required | Description
 --------- | ------- | -----------
 email | Yes | It should be user's email address.
 password | Yes | It should be user's password.
-retype | No | Parameter value is not needed.
-full_name | Yes | Parameter value is not needed.
-email_verified | No | Static N is passed.
 
 >Example Success Response:
 
@@ -70,6 +53,10 @@ email_verified | No | Static N is passed.
 }
 ```
 
+<aside class="notice">
+After successful registration, get all accounts, groups, settings and send device token to server.
+</aside>
+
 > Example Error Response:
 
 >Response Code: 200
@@ -88,6 +75,10 @@ This api is used for user registration.
 ### HTTP Request
 
 `POST https://panel.socialpilot.co/mobapi/registerbysm`
+
+<aside class="notice">
+As twitter api do not provide email id, send full name compulsory in that case.
+</aside>
 
 ### Query Parameters
 
@@ -143,6 +134,10 @@ Parameter | Required | Description
 username | Yes | It should be user's email address.
 password | Yes | It should be user's password.
 
+<aside class="notice">
+After successful login, get all accounts, groups, settings and send device token to server.
+</aside>
+
 >Example Success Response:
 
 >Response Code: 200
@@ -184,6 +179,10 @@ Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 
+<aside class="notice">
+After verifying accesstoken, get all accounts, groups, settings and send device token to server.
+</aside>
+
 >Example Success Response:
 
 >Response Code: 200
@@ -210,6 +209,115 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 	"msg": "Invalid access token provided. Check your access_token value"
 }
 ```
+
+# Settings
+
+## Get All Settings
+
+This api is used to fetch all settings.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/settings`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+[{
+	"key": "is_active",
+	"value": "Y"
+}, {
+	"key": "time_zone",
+	"value": "+05:30"
+}, {
+	"key": "time_zone_full",
+	"value": "Asia\/Calcutta"
+}, {
+	"key": "membership",
+	"value": "10"
+}, {
+	"key": "url_shortner",
+	"value": "1"
+}, {
+	"key": "bitly_token",
+	"value": "p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr"
+}, {
+	"key": "trial_used",
+	"value": "Y"
+}, {
+	"key": "user_type",
+	"value": "I"
+}, {
+	"key": "country",
+	"value": "India"
+}, {
+	"key": "last_login_country",
+	"value": "India"
+}, {
+	"key": "company_id",
+	"value": "12416"
+}, {
+	"key": "s_id",
+	"value": "16"
+}]
+```
+
+> Example Error Response:
+
+>Response Code: 401
+
+```json
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+## Update Status
+
+This API is used to update account status.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/updatestatus`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+ {
+	"error": 0,
+	"status": "Paused"
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": 1,
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
 
 # Accounts
 
@@ -744,6 +852,8 @@ You must replace <code>{ACCOUNT_ID}</code> with your own account id in above api
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
+account_name | Yes | It should be account name you edited.
+group_id[position] | Yes | It should be group_id's array of groups which are connected to this account.
 
 >Example Success Response:
 
@@ -1427,6 +1537,8 @@ Parameter | Required | Description
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 group_name | Yes | It should be name of group at least of 5 characters.
 description | No | It should be description of your group.
+account_id[position] | Yes | It should be account_id's array of accounts which are connected to this account.
+
 
 >Example Success Response:
 
@@ -1537,77 +1649,6 @@ account_id | Yes | It should be account_id which you want to delete from this gr
 {
 	"error": 1,
 	"msg": "Something went wrong. Try again later."
-}
-```
-
-# Settings
-
-## Get All Settings
-
-This api is used to fetch all settings.
-
-### HTTP Request
-
-`GET https://panel.socialpilot.co/oauth/settings`
-
-### Query Parameters
-
-Parameter | Required | Description
---------- | ------- | -----------
-access_token | Yes | It should be accesstoken provided from server on user's successful login.
-
->Example Success Response:
-
->Response Code: 200
-
-```json
-[{
-	"key": "is_active",
-	"value": "Y"
-}, {
-	"key": "time_zone",
-	"value": "+05:30"
-}, {
-	"key": "time_zone_full",
-	"value": "Asia\/Calcutta"
-}, {
-	"key": "membership",
-	"value": "10"
-}, {
-	"key": "url_shortner",
-	"value": "1"
-}, {
-	"key": "bitly_token",
-	"value": "p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr"
-}, {
-	"key": "trial_used",
-	"value": "Y"
-}, {
-	"key": "user_type",
-	"value": "I"
-}, {
-	"key": "country",
-	"value": "India"
-}, {
-	"key": "last_login_country",
-	"value": "India"
-}, {
-	"key": "company_id",
-	"value": "12416"
-}, {
-	"key": "s_id",
-	"value": "16"
-}]
-```
-
-> Example Error Response:
-
->Response Code: 401
-
-```json
-{
-	"error": 1,
-	"msg": "Invalid access token provided. Check your access_token value"
 }
 ```
 
@@ -1997,6 +2038,7 @@ preview[title]| No | A preview title
 preview[url]| No |An URL of the preview title
 preview[image]| No | A preview image path
 preview[description]| No | A short description for the preview
+post_image| Yes | It should be image in multipart form.
 
 >Example Success Response:
 
@@ -2613,15 +2655,15 @@ id | No | If feeds are to be filtered using category id.
 }
 ```
 
-# Update Status
+# Membership
 
-## Update Status
+## Trial Membership
 
-This API is used to update account status.
+This api is used for activating trial membership.
 
 ### HTTP Request
 
-`GET https://panel.socialpilot.co/oauth/updatestatus`
+`GET https://panel.socialpilot.co/oauth/trialmembership`
 
 ### Query Parameters
 
@@ -2634,9 +2676,9 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 >Response Code: 200
 
 ```json
- {
+{
 	"error": 0,
-	"status": "Paused"
+	"msg": "Your membership is successfully upgraded. Enjoy Pro benefits!"
 }
 ```
 
@@ -2644,14 +2686,12 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 
 >Response Code: 401
  
-```json
-
-{
-	"error": 1,
+ ```json
+ {
+	"error": "1",
 	"msg": "Invalid access token provided. Check your access_token value"
 }
 ```
-
 
 
 
