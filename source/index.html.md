@@ -190,11 +190,14 @@ After verifying accesstoken, get all accounts, groups, settings and send device 
 ```json
 {
 	"error": 0,
-	"msg": {
-		"access_token": "wYa03y3DqabDnbP0W35woLsNAVCeNkyAQzjKMG9jmPLCgfT60XE1P2IRaNuZwErWoBzOXzVWj2ADE4wq",
-		"token_type": "Bearer",
-		"expires": 1491198181,
-		"expires_in": 5184000
+	"data": {
+		"client_id": "eduwk99yb1ou85wq2l533puvhw3q553kjyg38q2j",
+		"organization_id": "36803",
+		"company_id": "36803",
+		"user_id": "36803",
+		"is_email_verified": "N",
+		"login_as": 0,
+		"user_email": "dhruvi@creativeglance.com"
 	}
 }
 ```
@@ -233,40 +236,72 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 ```json
 [{
 	"key": "is_active",
-	"value": "Y"
+	"value": "Y",
+	"array_value": []
 }, {
 	"key": "time_zone",
-	"value": "+05:30"
+	"value": "+05:30",
+	"array_value": []
 }, {
 	"key": "time_zone_full",
-	"value": "Asia\/Calcutta"
+	"value": "Asia\/Calcutta",
+	"array_value": []
 }, {
 	"key": "membership",
-	"value": "10"
+	"value": "10",
+	"array_value": []
 }, {
 	"key": "url_shortner",
-	"value": "1"
+	"value": "1",
+	"array_value": []
 }, {
 	"key": "bitly_token",
-	"value": "p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr"
+	"value": "p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr",
+	"array_value": []
 }, {
 	"key": "trial_used",
-	"value": "Y"
+	"value": "Y",
+	"array_value": []
 }, {
 	"key": "user_type",
-	"value": "I"
+	"value": "I",
+	"array_value": []
 }, {
 	"key": "country",
-	"value": "India"
+	"value": "INDIA",
+	"array_value": []
 }, {
 	"key": "last_login_country",
-	"value": "India"
+	"value": "India",
+	"array_value": []
 }, {
 	"key": "company_id",
-	"value": "12416"
+	"value": "12416",
+	"array_value": []
 }, {
 	"key": "s_id",
-	"value": "16"
+	"value": "0",
+	"array_value": []
+}, {
+	"key": "team_option",
+	"value": "",
+	"array_value": [{
+		"id": "0",
+		"name": "My Panel"
+	}, {
+		"id": "12325",
+		"name": "D"
+	}, {
+		"id": "162",
+		"name": "S"
+	}, {
+		"id": "36803",
+		"name": "D"
+	}]
+}, {
+	"key": "login_as",
+	"value": "0",
+	"array_value": []
 }]
 ```
 
@@ -283,7 +318,7 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 
 ## Update Status
 
-This API is used to update account status.
+This API is used to update status.
 
 ### HTTP Request
 
@@ -334,6 +369,7 @@ This api is used for fetching all accounts.
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
@@ -1667,7 +1703,7 @@ This api is used to send device token to server.
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
-version | Yes | It should be current version of your app same as in your app level build.gradle file.
+version | Yes | It should be current version of your phone.
 device_token | Yes | It should be device token received from FCM server.
 device_model | Yes | It should be your device's model.
 app_version | Yes | It should be current version of your app same as in your app level build.gradle file.
@@ -1705,15 +1741,27 @@ This api is used for fetching queued posts.
 
 `GET https://panel.socialpilot.co/oauth/post/queue`
 
+<aside class="notice">
+If we don't want any kind of filter ie. default filter would be "Accounts - All", for this we don't need to pass "filter" and "id" parameters.
+</aside>
+
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
+p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+filter | No | It should be filter name i.e. accounts, groups, team member, clients, etc.
+id | No | It should be filter id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
 >Response Code: 200
+
+><aside class="notice">
+If "nextpage" parameter in below response contains any url, just call this url for pagination.
+</aside>
 
 ```json
 {
@@ -1762,12 +1810,19 @@ This api is used for fetching unscheduled posts.
 
 `GET https://panel.socialpilot.co/oauth/post/unscheduled`
 
+<aside class="notice">
+If we don't want any kind of filter ie. default filter would be "Accounts - All", for this we don't need to pass "filter" and "id" parameters.
+</aside>
+
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+filter | No | It should be filter name i.e. accounts, groups, team member, clients, etc.
+id | No | It should be filter id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 
 >Example Success Response:
@@ -1859,12 +1914,19 @@ This api is used for fetching error posts.
 
 `GET https://panel.socialpilot.co/oauth/post/errors`
 
+<aside class="notice">
+If we don't want any kind of filter ie. default filter would be "Accounts - All", for this we don't need to pass "filter" and "id" parameters.
+</aside>
+
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+filter | No | It should be filter name i.e. accounts, groups, team member, clients, etc.
+id | No | It should be filter id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
@@ -1920,12 +1982,19 @@ This api is used for fetching delivered posts.
 
 `GET https://panel.socialpilot.co/oauth/post/deliverd`
 
+<aside class="notice">
+If we don't want any kind of filter ie. default filter would be "Accounts - All", for this we don't need to pass "filter" and "id" parameters.
+</aside>
+
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+filter | No | It should be filter name i.e. accounts, groups, team member, clients, etc.
+id | No | It should be filter id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
@@ -1976,6 +2045,10 @@ If "nextpage" parameter in below response contains any url, just call this url f
 
 ## Contributed Posts
 
+<aside class="notice">
+If we don't want any kind of filter ie. default filter would be "Accounts - All", for this we don't need to pass "filter" and "id" parameters.
+</aside>
+
 This api is used for fetching delivered posts.
 
 ### HTTP Request
@@ -1988,6 +2061,9 @@ Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 p | No | It should be page number for doing pagination if the value of "nextpage" in previous response is not blank.
+filter | No | It should be filter name i.e. accounts, groups, team member, clients, etc.
+id | No | It should be filter id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
@@ -2369,7 +2445,7 @@ This api is used for editing post.
 
 ### HTTP Request
 
-`GET https://panel.socialpilot.co/oauth/post/movetotop/{POST_ID}`
+`POST https://panel.socialpilot.co/oauth/post/edit/{POST_ID}`
 
 <aside class="notice">
 <code>{POST_ID}</code> is to be replaced with your post_id.
@@ -2407,6 +2483,176 @@ post_image | No | Image in the form of multipart.
 	"msg": "<div><ul><li>Content cannot be blank</li></ul></div>"
 }
 ```
+
+## Filters for Posts
+
+This api is used for fetching filters list which are used for filtering posts data.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/filteroption`
+
+<aside class="notice">
+You need to add groups and accounts list to the data received from above api.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"msg": "",
+	"filter_data": [{
+		"name": "Team Member",
+		"data": []
+	}, {
+		"name": "Clients",
+		"data": [{
+			"id": "237",
+			"name": "ronak"
+		}, {
+			"id": "261",
+			"name": "ravi"
+		}, {
+			"id": "431",
+			"name": "ronu_2"
+		}, {
+			"id": "432",
+			"name": "ronu_3"
+		}, {
+			"id": "573",
+			"name": "Automation Team29_03_2017_12_18_53"
+		}]
+	}]
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+```json
+
+{
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value",
+	"access_token_expire": "1"
+}
+```
+## Posts Count
+
+This api is used for getting total posts count, queued post count, etc.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/postcount`
+
+<aside class="notice">
+If we don't want any kind of filter ie. default filter would be "Accounts - All", for this we don't need to pass "filter" and "id" parameters.
+</aside>
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+filter | No | It should be filter name i.e. accounts, groups, team member, clients, etc.
+id | No | It should be filter id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"error": 0,
+	"count": {
+		"error": "0",
+		"unschedule": "1",
+		"contrituter": "4",
+		"queue": "2"
+	}
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+
+
+# Insta Notifications
+
+## Get Notifications
+
+This api is used for getting instagram notifications.
+
+### HTTP Request
+
+`GET https://panel.socialpilot.co/oauth/instagramnotification`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+access_token | Yes | It should be accesstoken provided from server on user's successful login.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
+
+>Example Success Response:
+
+>Response Code: 200
+
+```json
+{
+	"recordcnt": "323",
+	"nextpage": "https:\/\/panel.socialpilot.co\/oauth\/instanotification?p=2",
+	"error": 0,
+	"posts": [{
+		"image_url": "https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2015\/07\/facebook_banner1.png",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=340&h=80&zc=1&src=https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2015\/07\/facebook_banner1.png",
+		"content": "SocialPilot: Social Media Scheduling & Marketing Automation Tool https:\/\/socialpilot.co ",
+		"account_username": "harshil",
+		"last_shared_on": "Apr 20, 2017 11:08 AM"
+	}, {
+		"image_url": "https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2016\/06\/social-media-image-size-fb.png",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=340&h=80&zc=1&src=https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2016\/06\/social-media-image-size-fb.png",
+		"content": "The Complete Social Media Image Sizes Cheat Sheet http:\/\/bit.ly\/2p4iCnw ",
+		"account_username": "ravi44shah",
+		"last_shared_on": "Apr 20, 2017 08:13 AM"
+	}]
+}
+```
+
+> Example Error Response:
+
+>Response Code: 401
+ 
+ ```json
+ {
+	"error": "1",
+	"msg": "Invalid access token provided. Check your access_token value"
+}
+```
+
+
+
 
 # Suggestions
 
@@ -2562,6 +2808,7 @@ This api is used for fetching categories of feeds.
 Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
@@ -2608,6 +2855,7 @@ Parameter | Required | Description
 --------- | ------- | -----------
 access_token | Yes | It should be accesstoken provided from server on user's successful login.
 id | No | If feeds are to be filtered using category id.
+team_owner_id | Yes | It should be "0" for MyPanel or ownerid of team selected.
 
 >Example Success Response:
 
