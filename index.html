@@ -348,11 +348,14 @@ After verifying accesstoken, get all accounts, groups, settings and send device 
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"wYa03y3DqabDnbP0W35woLsNAVCeNkyAQzjKMG9jmPLCgfT60XE1P2IRaNuZwErWoBzOXzVWj2ADE4wq"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1491198181</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">5184000</span><span class="w">
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eduwk99yb1ou85wq2l533puvhw3q553kjyg38q2j"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"organization_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36803"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"company_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36803"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"user_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36803"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"is_email_verified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"N"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"login_as"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"user_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dhruvi@creativeglance.com"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -399,40 +402,72 @@ After verifying accesstoken, get all accounts, groups, settings and send device 
 </blockquote>
 <pre class="highlight json"><code><span class="p">[{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"is_active"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"time_zone"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+05:30"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+05:30"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"time_zone_full"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asia\/Calcutta"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Asia\/Calcutta"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"membership"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"url_shortner"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bitly_token"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"p0kxYlcremGukZqFvnWtFGgbYFE2DLGzszo5a1cLOyumGVWVY1fSTLbSBBVw9Jzr"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"trial_used"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Y"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user_type"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"I"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"country"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"India"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"INDIA"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_login_country"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"India"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"India"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"company_id"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12416"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12416"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"s_id"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16"</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"team_option"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Panel"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12325"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"162"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"S"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36803"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"login_as"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"array_value"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
 </span><span class="p">}]</span><span class="w">
 </span></code></pre>
 <blockquote>
@@ -447,7 +482,7 @@ After verifying accesstoken, get all accounts, groups, settings and send device 
 </span></code></pre>
 <h2 id="update-status">Update Status</h2>
 
-<p>This API is used to update account status.</p>
+<p>This API is used to update status.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -513,6 +548,11 @@ After verifying accesstoken, get all accounts, groups, settings and send device 
 <td>access_token</td>
 <td>Yes</td>
 <td>It should be accesstoken provided from server on user&rsquo;s successful login.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
 </tr>
 </tbody></table>
 
@@ -2024,7 +2064,7 @@ You must replace <code>{GROUP_ID}</code> with your own group id in above API.
 <tr>
 <td>version</td>
 <td>Yes</td>
-<td>It should be current version of your app same as in your app level build.gradle file.</td>
+<td>It should be current version of your phone.</td>
 </tr>
 <tr>
 <td>device_token</td>
@@ -2078,6 +2118,10 @@ You must replace <code>{GROUP_ID}</code> with your own group id in above API.
 
 <p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/post/queue</code></p>
 
+<aside class="notice">
+If we don&rsquo;t want any kind of filter ie. default filter would be &ldquo;Accounts - All&rdquo;, for this we don&rsquo;t need to pass &ldquo;filter&rdquo; and &ldquo;id&rdquo; parameters.
+</aside>
+
 <h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
@@ -2092,12 +2136,36 @@ You must replace <code>{GROUP_ID}</code> with your own group id in above API.
 <td>Yes</td>
 <td>It should be accesstoken provided from server on user&rsquo;s successful login.</td>
 </tr>
+<tr>
+<td>p</td>
+<td>No</td>
+<td>It should be page number for doing pagination if the value of &ldquo;nextpage&rdquo; in previous response is not blank.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>No</td>
+<td>It should be filter name i.e. accounts, groups, team member, clients, etc.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>No</td>
+<td>It should be filter id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
+</tr>
 </tbody></table>
 
 <blockquote>
 <p>Example Success Response:</p>
 
 <p>Response Code: 200</p>
+
+<aside class="notice">
+If &ldquo;nextpage&rdquo; parameter in below response contains any url, just call this url for pagination.
+</aside>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
@@ -2143,6 +2211,10 @@ You must replace <code>{GROUP_ID}</code> with your own group id in above API.
 
 <p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/post/unscheduled</code></p>
 
+<aside class="notice">
+If we don&rsquo;t want any kind of filter ie. default filter would be &ldquo;Accounts - All&rdquo;, for this we don&rsquo;t need to pass &ldquo;filter&rdquo; and &ldquo;id&rdquo; parameters.
+</aside>
+
 <h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
@@ -2161,6 +2233,21 @@ You must replace <code>{GROUP_ID}</code> with your own group id in above API.
 <td>p</td>
 <td>No</td>
 <td>It should be page number for doing pagination if the value of &ldquo;nextpage&rdquo; in previous response is not blank.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>No</td>
+<td>It should be filter name i.e. accounts, groups, team member, clients, etc.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>No</td>
+<td>It should be filter id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
 </tr>
 </tbody></table>
 
@@ -2251,6 +2338,10 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 
 <p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/post/errors</code></p>
 
+<aside class="notice">
+If we don&rsquo;t want any kind of filter ie. default filter would be &ldquo;Accounts - All&rdquo;, for this we don&rsquo;t need to pass &ldquo;filter&rdquo; and &ldquo;id&rdquo; parameters.
+</aside>
+
 <h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
@@ -2269,6 +2360,21 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 <td>p</td>
 <td>No</td>
 <td>It should be page number for doing pagination if the value of &ldquo;nextpage&rdquo; in previous response is not blank.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>No</td>
+<td>It should be filter name i.e. accounts, groups, team member, clients, etc.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>No</td>
+<td>It should be filter id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
 </tr>
 </tbody></table>
 
@@ -2324,6 +2430,10 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 
 <p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/post/deliverd</code></p>
 
+<aside class="notice">
+If we don&rsquo;t want any kind of filter ie. default filter would be &ldquo;Accounts - All&rdquo;, for this we don&rsquo;t need to pass &ldquo;filter&rdquo; and &ldquo;id&rdquo; parameters.
+</aside>
+
 <h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
@@ -2342,6 +2452,21 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 <td>p</td>
 <td>No</td>
 <td>It should be page number for doing pagination if the value of &ldquo;nextpage&rdquo; in previous response is not blank.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>No</td>
+<td>It should be filter name i.e. accounts, groups, team member, clients, etc.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>No</td>
+<td>It should be filter id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
 </tr>
 </tbody></table>
 
@@ -2392,6 +2517,10 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 </span></code></pre>
 <h2 id="contributed-posts">Contributed Posts</h2>
 
+<aside class="notice">
+If we don&rsquo;t want any kind of filter ie. default filter would be &ldquo;Accounts - All&rdquo;, for this we don&rsquo;t need to pass &ldquo;filter&rdquo; and &ldquo;id&rdquo; parameters.
+</aside>
+
 <p>This api is used for fetching delivered posts.</p>
 
 <h3 id="http-request">HTTP Request</h3>
@@ -2416,6 +2545,21 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 <td>p</td>
 <td>No</td>
 <td>It should be page number for doing pagination if the value of &ldquo;nextpage&rdquo; in previous response is not blank.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>No</td>
+<td>It should be filter name i.e. accounts, groups, team member, clients, etc.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>No</td>
+<td>It should be filter id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
 </tr>
 </tbody></table>
 
@@ -2953,7 +3097,7 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/post/movetotop/{POST_ID}</code></p>
+<p><code class="prettyprint">POST https://panel.socialpilot.co/oauth/post/edit/{POST_ID}</code></p>
 
 <aside class="notice">
 <code>{POST_ID}</code> is to be replaced with your post_id.
@@ -3014,6 +3158,216 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 </span><span class="p">{</span><span class="w">
     </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;div&gt;&lt;ul&gt;&lt;li&gt;Content cannot be blank&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="filters-for-posts">Filters for Posts</h2>
+
+<p>This api is used for fetching filters list which are used for filtering posts data.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/filteroption</code></p>
+
+<aside class="notice">
+You need to add groups and accounts list to the data received from above api.
+</aside>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Yes</td>
+<td>It should be accesstoken provided from server on user&rsquo;s successful login.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example Success Response:</p>
+
+<p>Response Code: 200</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"filter_data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Team Member"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clients"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"237"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronak"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ravi"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"431"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronu_2"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"432"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ronu_3"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"573"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Automation Team29_03_2017_12_18_53"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Error Response:</p>
+
+<p>Response Code: 401</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid access token provided. Check your access_token value"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"access_token_expire"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h2 id="posts-count">Posts Count</h2>
+
+<p>This api is used for getting total posts count, queued post count, etc.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/postcount</code></p>
+
+<aside class="notice">
+If we don&rsquo;t want any kind of filter ie. default filter would be &ldquo;Accounts - All&rdquo;, for this we don&rsquo;t need to pass &ldquo;filter&rdquo; and &ldquo;id&rdquo; parameters.
+</aside>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Yes</td>
+<td>It should be accesstoken provided from server on user&rsquo;s successful login.</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>No</td>
+<td>It should be filter name i.e. accounts, groups, team member, clients, etc.</td>
+</tr>
+<tr>
+<td>id</td>
+<td>No</td>
+<td>It should be filter id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example Success Response:</p>
+
+<p>Response Code: 200</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"unschedule"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"contrituter"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"queue"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Error Response:</p>
+
+<p>Response Code: 401</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid access token provided. Check your access_token value"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<h1 id="insta-notifications">Insta Notifications</h1>
+
+<h2 id="get-notifications">Get Notifications</h2>
+
+<p>This api is used for getting instagram notifications.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://panel.socialpilot.co/oauth/instagramnotification</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>access_token</td>
+<td>Yes</td>
+<td>It should be accesstoken provided from server on user&rsquo;s successful login.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Example Success Response:</p>
+
+<p>Response Code: 200</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"recordcnt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"323"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"nextpage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:\/\/panel.socialpilot.co\/oauth\/instanotification?p=2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"posts"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+        </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2015\/07\/facebook_banner1.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thumb_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=340&amp;h=80&amp;zc=1&amp;src=https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2015\/07\/facebook_banner1.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SocialPilot: Social Media Scheduling &amp; Marketing Automation Tool https:\/\/socialpilot.co "</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"harshil"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"last_shared_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apr 20, 2017 11:08 AM"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2016\/06\/social-media-image-size-fb.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thumb_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=340&amp;h=80&amp;zc=1&amp;src=https:\/\/asset.socialpilot.co\/wp-content\/uploads\/2016\/06\/social-media-image-size-fb.png"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Complete Social Media Image Sizes Cheat Sheet http:\/\/bit.ly\/2p4iCnw "</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"account_username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ravi44shah"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"last_shared_on"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Apr 20, 2017 08:13 AM"</span><span class="w">
+    </span><span class="p">}]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Example Error Response:</p>
+
+<p>Response Code: 401</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"error"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"msg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Invalid access token provided. Check your access_token value"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <h1 id="suggestions">Suggestions</h1>
@@ -3203,6 +3557,11 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 <td>Yes</td>
 <td>It should be accesstoken provided from server on user&rsquo;s successful login.</td>
 </tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
+</tr>
 </tbody></table>
 
 <blockquote>
@@ -3260,6 +3619,11 @@ If &ldquo;nextpage&rdquo; parameter in below response contains any url, just cal
 <td>id</td>
 <td>No</td>
 <td>If feeds are to be filtered using category id.</td>
+</tr>
+<tr>
+<td>team_owner_id</td>
+<td>Yes</td>
+<td>It should be &ldquo;0&rdquo; for MyPanel or ownerid of team selected.</td>
 </tr>
 </tbody></table>
 
