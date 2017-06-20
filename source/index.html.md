@@ -34,6 +34,7 @@ Parameter | Required | Description
 --------- | ------- | -----------
 email | Yes | It should be user's email address.
 password | Yes | It should be user's password.
+mix_id | Yes | Mixpanel's distinct id.
 
 >Example Success Response:
 
@@ -88,6 +89,7 @@ email | No | Twitter registration do not require email, while linkedin and fb re
 full_name | No | Full name fetched from third party.
 email_verified | No | Static Y or N is passed.
 from | Yes | Name of social media you are using.
+mix_id | Yes | Mixpanel's distinct id.
 
 >Example Success Response:
 
@@ -146,11 +148,13 @@ After successful login, get all accounts, groups, settings and send device token
 {
 	"error": 0,
 	"msg": {
-		"access_token": "7PoRmE9vFXr70CeaxzEFAmlZdxCze7ZkHog6RgpkBurspzFcaParmRxODzcaIsAMQ3n6pEn9ywLpCH5D",
+		"access_token": "x0VtS4B4OcYuwUDAfkEmqMyqQcME3VF4oiYu5qBwzT6jB4a4LDHXMAuMBxpP6XTpps8Pnx5fYTPWsPtM",
 		"token_type": "Bearer",
-		"expires": 1491216307,
+		"expires": 1503049878,
 		"expires_in": 5184000
-	}
+	},
+	"master_user": "N",
+	"company_id": 12416
 }
 ```
 
@@ -1766,26 +1770,30 @@ If "nextpage" parameter in below response contains any url, just call this url f
 ```json
 {
 	"posts": [{
-		"log_id": "5603984",
-		"post_date": "8 Feb, 2017",
-		"posttime": "2017-02-08 03:57 PM",
-		"posttime_format": "Feb 08, 03:57 PM",
+		"log_id": "10053065",
 		"account": {
-			"account_id": "35734",
-			"account_url": "https:\/\/vk.com\/id306627681",
-			"account_username": "Rutul Gajjar",
-			"account_type": "vk"
+			"account_id": 110538,
+			"account_url": "https:\/\/www.facebook.com\/My-name-1240112166000411\/",
+			"account_username": "My name",
+			"is_deleted": "N",
+			"account_type": "facebook-official"
 		},
-		"post_content": "Proven Strategies to Boost Social Media Shares and Conversions  http:\/\/bitly.com\/2kRe41N",
-		"post_image": "https:\/\/socialpilot.co\/wp-content\/uploads\/2017\/02\/social-media-shares-fb.png",
-		"created_on": "2017-02-01 13:59:04",
-		"post_url": "https:\/\/socialpilot.co\/blog\/proven-strategies-to-boost-social-media-shares-and-conversions\/",
+		"post_content": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_title": "",
+		"description": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_image": "http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
+		"post_type": "I",
+		"post_url": "https:\/\/goo.gl\/PsJPkB",
+		"posttime_format": "Jun 17, 2017 12:05 PM",
+		"post_video": "",
+		"post_status": "Y",
+		"post_extra_params": "{\"aspect_ratio\":\"64:33\",\"duration\":\"00:17\",\"bit_rate\":308567,\"frame_rate\":\"30\/1\",\"video_codec\":\"h264\",\"width\":640,\"height\":330,\"video_frames\":516,\"pixel_aspect_ratio\":\"1:1\",\"duration_sec\":17,\"size\":670455,\"mime_type\":\"video\/mp4\",\"video_key\":\"JXNa81497594241598.mp4\"}",
 		"is_paused": "N",
-		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=https:\/\/socialpilot.co\/wp-content\/uploads\/2017\/02\/social-media-shares-fb.png",
-		"is_auto": "Y",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
 		"access_type": "O",
-		"via": "Feed",
-		"by": "rutul"
+		"via": "Web",
+		"created_on": "2017-06-17 06:34:28",
+		"by": "Rutul"
 	}],
 	"queuecnt": 1
 }
@@ -1836,59 +1844,30 @@ If "nextpage" parameter in below response contains any url, just call this url f
 ```json
 {
 	"posts": [{
-		"log_id": "5598009",
+		"log_id": "10053065",
 		"account": {
-			"account_id": 99581,
-			"account_url": "https:\/\/www.instagram.com\/",
-			"account_username": "rutul123",
-			"account_type": "instagram"
+			"account_id": 110538,
+			"account_url": "https:\/\/www.facebook.com\/My-name-1240112166000411\/",
+			"account_username": "My name",
+			"is_deleted": "N",
+			"account_type": "facebook-official"
 		},
-		"post_content": "Get Moving! 4 Urgent Reasons You Should Sell Your Home in 2017 https:\/\/goo.gl\/Jfkisi",
-		"post_image": "http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
-		"post_status": "L",
-		"post_url": "https:\/\/goo.gl\/Jfkisi",
+		"post_content": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_title": "",
+		"description": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_image": "http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
+		"post_type": "I",
+		"post_url": "https:\/\/goo.gl\/PsJPkB",
+		"posttime_format": "Jun 17, 2017 12:05 PM",
+		"post_video": "",
+		"post_status": "Y",
+		"post_extra_params": "{\"aspect_ratio\":\"64:33\",\"duration\":\"00:17\",\"bit_rate\":308567,\"frame_rate\":\"30\/1\",\"video_codec\":\"h264\",\"width\":640,\"height\":330,\"video_frames\":516,\"pixel_aspect_ratio\":\"1:1\",\"duration_sec\":17,\"size\":670455,\"mime_type\":\"video\/mp4\",\"video_key\":\"JXNa81497594241598.mp4\"}",
 		"is_paused": "N",
-		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
-		"access_type": "O",
-		"via": "Mobile App",
-		"created_on": "2017-02-01 11:05:32",
-		"by": "rutul"
-	}, {
-		"log_id": "5403080",
-		"account": {
-			"account_id": 42788,
-			"account_url": "http:\/\/vk.com\/club107731330",
-			"account_username": "Android",
-			"account_type": "vk-group"
-		},
-		"post_content": "sdf",
-		"post_image": "",
-		"post_status": "L",
-		"post_url": "",
-		"is_paused": "N",
-		"thumb_image": "",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
 		"access_type": "O",
 		"via": "Web",
-		"created_on": "2017-01-25 12:03:28",
-		"by": "rutul"
-	}, {
-		"log_id": "5403078",
-		"account": {
-			"account_id": 42788,
-			"account_url": "http:\/\/vk.com\/club107731330",
-			"account_username": "Android",
-			"account_type": "vk-group"
-		},
-		"post_content": "sdf",
-		"post_image": "",
-		"post_status": "L",
-		"post_url": "",
-		"is_paused": "N",
-		"thumb_image": "",
-		"access_type": "O",
-		"via": "Web",
-		"created_on": "2017-01-25 12:03:28",
-		"by": "rutul"
+		"created_on": "2017-06-17 06:34:28",
+		"by": "Rutul"
 	}],
 	"nextpage": "",
 	"recordcnt": 3
@@ -1939,24 +1918,30 @@ If "nextpage" parameter in below response contains any url, just call this url f
 ```json
 {
 	"posts": [{
-		"log_id": "5598892",
+		"log_id": "10053065",
 		"account": {
-			"account_id": 93017,
-			"account_url": "https:\/\/www.instagram.com\/",
-			"account_username": "harshil",
-			"account_type": "instagram"
+			"account_id": 110538,
+			"account_url": "https:\/\/www.facebook.com\/My-name-1240112166000411\/",
+			"account_username": "My name",
+			"is_deleted": "N",
+			"account_type": "facebook-official"
 		},
-		"post_content": "\u00bfDeberias mentir en una entrevista de trabajo? https:\/\/goo.gl\/BWlPiQ ",
-		"error_msg": "Install SocialPilot mobile apps for Instagram Reminder",
-		"post_image": "http:\/\/cazatutrabajo.com\/wp-content\/uploads\/2014\/02\/mentir-entrevista-trabajo.jpg",
-		"post_url": "https:\/\/goo.gl\/BWlPiQ",
-		"posttime_format": "02-Feb-2017 04:22 PM",
+		"post_content": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_title": "",
+		"description": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_image": "http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
+		"post_type": "I",
+		"post_url": "https:\/\/goo.gl\/PsJPkB",
+		"posttime_format": "Jun 17, 2017 12:05 PM",
+		"post_video": "",
+		"post_status": "Y",
+		"post_extra_params": "{\"aspect_ratio\":\"64:33\",\"duration\":\"00:17\",\"bit_rate\":308567,\"frame_rate\":\"30\/1\",\"video_codec\":\"h264\",\"width\":640,\"height\":330,\"video_frames\":516,\"pixel_aspect_ratio\":\"1:1\",\"duration_sec\":17,\"size\":670455,\"mime_type\":\"video\/mp4\",\"video_key\":\"JXNa81497594241598.mp4\"}",
 		"is_paused": "N",
-		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/cazatutrabajo.com\/wp-content\/uploads\/2014\/02\/mentir-entrevista-trabajo.jpg",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
 		"access_type": "O",
-		"via": "Mobile App",
-		"created_on": "2017-02-01 11:33:02",
-		"by": "rutul"
+		"via": "Web",
+		"created_on": "2017-06-17 06:34:28",
+		"by": "Rutul"
 	}],
 	"nextpage": "",
 	"recordcnt": 3
@@ -2007,25 +1992,30 @@ If "nextpage" parameter in below response contains any url, just call this url f
 ```json
 {
 	"posts": [{
-		"log_id": "5583775",
+		"log_id": "10053065",
 		"account": {
-			"account_id": 88190,
-			"account_url": "https:\/\/plus.google.com\/105760589956175049099",
-			"account_username": "my page",
+			"account_id": 110538,
+			"account_url": "https:\/\/www.facebook.com\/My-name-1240112166000411\/",
+			"account_username": "My name",
 			"is_deleted": "N",
-			"account_type": "google-plus-square"
+			"account_type": "facebook-official"
 		},
-		"post_content": "Get Moving! 4 Urgent Reasons You Should Sell Your Home in 2017 https:\/\/goo.gl\/Jfkisi",
-		"post_image": "http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
-		"post_type": "T",
-		"post_url": "https:\/\/goo.gl\/Jfkisi",
-		"posttime_format": "02-Feb-2017 10:39 AM",
+		"post_content": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_title": "",
+		"description": "If you're managing your own social media marketing, automation tools come in handy\u2026especially since timing of getting content out there is critical o engaging your audience. http:\/\/bit.ly\/2scQBbB ",
+		"post_image": "http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
+		"post_type": "I",
+		"post_url": "https:\/\/goo.gl\/PsJPkB",
+		"posttime_format": "Jun 17, 2017 12:05 PM",
+		"post_video": "",
+		"post_status": "Y",
+		"post_extra_params": "{\"aspect_ratio\":\"64:33\",\"duration\":\"00:17\",\"bit_rate\":308567,\"frame_rate\":\"30\/1\",\"video_codec\":\"h264\",\"width\":640,\"height\":330,\"video_frames\":516,\"pixel_aspect_ratio\":\"1:1\",\"duration_sec\":17,\"size\":670455,\"mime_type\":\"video\/mp4\",\"video_key\":\"JXNa81497594241598.mp4\"}",
 		"is_paused": "N",
-		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/rdcnewscdn.realtor.com\/wp-content\/uploads\/2017\/01\/sell-your-house-2017.jpg",
+		"thumb_image": "https:\/\/panel.socialpilot.co\/themes\/socialpilot\/assets\/timthumb.php?w=60&h=60&zc=1&src=http:\/\/www.socialmediatoday.com\/sites\/default\/files\/aashish%20sarma\/files\/Sendible-600x340.png",
 		"access_type": "O",
-		"via": "Mobile App",
-		"created_on": "2017-02-01 07:15:05",
-		"by": "rutul"
+		"via": "Web",
+		"created_on": "2017-06-17 06:34:28",
+		"by": "Rutul"
 	}],
 	"nextpage": "https:\/\/panel.socialpilot.co\/oauth\/post\/deliverd\/2",
 	"recordcnt": 1513
@@ -2114,7 +2104,7 @@ preview[title]| No | A preview title
 preview[url]| No |An URL of the preview title
 preview[image]| No | A preview image path
 preview[description]| No | A short description for the preview
-post_image| Yes | It should be image in multipart form.
+post_image| No | No need to send this parameter now
 
 >Example Success Response:
 
@@ -2161,10 +2151,13 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 group_id | No | A group id whose associated accounts will receive the status update. Invalid ids will be ignored.
 post_content | No | It should be post content you edited.
 account_id[position] | Yes | It should be account id from which you are creating this post.
-post_image| Yes | It should be image in multipart form.
+post_image| No | No need to send this parameter now
 now | No | If now is set to true, this update will be sent immediately.
 schedule_date | No | A date describing when the update should be posted. Overrides now parameter. If no UTC offset is specified, UTC is assumed.
-image_url| No | Url of the image.
+image_url| No | S3's image url if its image post
+video_url| No | S3's video url if its video post
+is_new_video| No | Only when sharing same post from delivered tab ("1" if new video, else "0" if same old video)
+post_extra_params| No | Only when resharing post from delivered tab (the value for this parameter is provided in all apis like queue, deleivred, etc. api, send the same value here)
 
 >Example Success Response:
 
@@ -2459,7 +2452,12 @@ access_token | Yes | It should be accesstoken provided from server on user's suc
 post_content| No | It is compulsory to write content if you are not attaching image.
 is_removed | Yes | Either Y or N.
 from | No | It should be only in case of contributed posts. 
-post_image | No | Image in the form of multipart.
+post_image| No | No need to send this parameter now
+image_url| No | S3's image url if its image post
+video_url| No | S3's video url if its video post
+is_new_video| No | Only when sharing same post from delivered tab ("1" if new video, else "0" if same old video)
+post_extra_params| No | Only when resharing post from delivered tab (the value for this parameter is provided in all apis like queue, deleivred, etc. api, send the same value here)
+
 
 >Example Success Response:
 
